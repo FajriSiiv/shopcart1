@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { StarIcon } from "@heroicons/react/solid";
 import { useDispatch } from "react-redux";
-// import { addCart } from "../../components/redux/action";
-import { ADDITEM } from "../../components/redux/reducer/handleCart";
+import { addCart } from "../../components/redux/action";
 
 const Details = ({ product }) => {
-  console.log(product);
-  const rates = Math.floor(product.rating.rate);
-
   const dispatch = useDispatch();
+  const addProduct = (product) => {
+    dispatch(addCart(product));
+  };
+
+  const rates = Math.floor(product.rating.rate);
 
   return (
     <div className="lg:px-10 lg:pt-[120px] px-2 py-[110px]">
@@ -40,7 +41,7 @@ const Details = ({ product }) => {
           <p className="mt-3 text-sm lg:text-md">{product.description}</p>
 
           <button
-            onClick={() => dispatch(ADDITEM({ product }))}
+            onClick={() => addProduct(product)}
             className="btn-kat m-0 mt-5"
           >
             Add to Cart
